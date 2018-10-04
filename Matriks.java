@@ -520,6 +520,51 @@ public class Matriks
         }
         System.out.println(this.hasil);
   }
+  public void solveInterpolasiGauss()
+  //I.S. matriks sudah di Gauss. Prekondisi : harus valid(tidak ada no solution)
+  //F.S. terbentuk persamaan interpolasi dan terhitung nilai fungsi sesuai masukan pengguna
+  {
+    boolean first = true;
+    int i,j;
+    this.hasil = 0;
+    double[] nilai = new double[this.bar];
+    tulism();
+    persI = "f(X) = ";
+    for (i = this.bar ; i >0 ; i--)
+    {
+      nilai[i-1] = Isi[i-1][this.kol-1];
+      for (j = i; j<this.kol-1; j++)
+      {
+        nilai[i-1] = nilai[i-1] - (Isi[i-1][j]*nilai[j]);
+      }
+      System.out.println(nilai[i-1]);
+    }
+    for(i = 0 ; i<this.bar ; i++)
+    {
+      if (nilai[i] != 0)
+      {
+        if (i == 0 || first == true)
+        {
+          if (i == 0){
+            persI = persI + String.format("(%.2f)", nilai[i]);
+          }
+          else
+          {
+            persI = persI + String.format("(%.2f)X^" + (i), nilai[i]);
+          }
+          first = false;
+        }
+        else
+        {
+          persI = persI + String.format(" + (%.2f)X^" + (i), nilai[i]);
+        }
+        this.hasil = this.hasil + (Math.pow(2.7 , i)*nilai[i]);
+
+        System.out.println(persI);
+      }
+    }
+    System.out.println(this.hasil);
+  }
   public void bacafile()
   //Membaca file yang berisi matriks dan mengisikan ke bentuk matriks
   {

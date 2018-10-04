@@ -515,7 +515,7 @@ public class Matriks
             {
               persI = persI + String.format(" + (%.2f)X^" + (i), Isi[i][this.kol-1]);
             }
-            this.hasil = this.hasil + (Math.pow(3 , i)*Isi[i][this.kol-1]);
+            this.hasil = this.hasil + (Math.pow(this.x , i)*Isi[i][this.kol-1]);
           }
         }
         System.out.println(this.hasil);
@@ -558,7 +558,7 @@ public class Matriks
         {
           persI = persI + String.format(" + (%.2f)X^" + (i), nilai[i]);
         }
-        this.hasil = this.hasil + (Math.pow(2.7 , i)*nilai[i]);
+        this.hasil = this.hasil + (Math.pow(this.x , i)*nilai[i]);
 
         System.out.println(persI);
       }

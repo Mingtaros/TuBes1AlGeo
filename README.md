@@ -5,27 +5,33 @@ File-file yang ada di Repository ini merupakan kerja keras sia-sia kami ber3<br>
 Project Name : TuBes AlGeo 1 (Matrix)
 
 FileName :
-  <li>TuBes.java (apaan nih samsek blom kelar)
-  <li>Matriks.java (apaan dah ini)
+  <li>TuBes.java
+  <li>Matriks.java
 
 Language : Java
 
-Motivation : Ya namanya juga tubes pak, hasil nguli kita pantes lah taro GitHub, hehe
+Motivation : Proyek ini dibuat atas dasar pengerjaan Tugas Besar IF2123 : Aljabar Geometri.
 
 Code Style : Standard
 
-ScreenShot : blom jirr sabar
+ScreenShot : Ada pada folder ScreenShot
 
 What You Need : Java-compiling Computer
 
-How to use : blom kelar woe
+How to use :
+1. Jalankan program TuBes.Java. <br>
+   (javac TuBes.java) -> (java TuBes)
+2. Memilih diantara 3 opsi yaitu Sistem Persamaan Linier, Interpolasi Polinom, dan Keluar.
+3. Memilih diantara 3 opsi yaitu Matriks Input, Matriks dari File, dan Keluar.
+4. Apabila matriks input, input dilakukan dengan bentuk matriks augmented.<br>
+   Apabila matriks 3x3, maka input 3x4 dengan kolom ke-4 berisi nilai-nilai di ruas kanan.\
+5. Apabila matriks diambil dari file, maka pengguna akan diminta untuk menulis nama file yang dituju.
+6. Memilih diantara 3 opsi yaitu Metode Gauss, Metode Gauss-Jordan, dan Keluar.
+7. Setelah mendapatkan bentuk Matriks Augmented dan hasil x<sub>1</sub>, x<sub>2</sub>, ..., x<sub>n</sub> , pengguna mendapat opsi untuk menyimpan hasil yang didapat ke suatu file (dengan nama input sendiri).
 
 Additional Information : nanti yaa
 
-Contribute : Klo butuh copy aj sumpah, tapi cantumin link GitHub gw (Informatika Berjiwa OpenSource)
-
-Credits : Tengs ke para pembuat dan para teman yang membantu (gk inget siapa aj)
-
+Dibuat Oleh :
 <table>
 <tr><td colspan = 3 align = "center">Anggota Kelompok :</td></tr>
 <tr><td>No.</td><td>Nama</td><td>NIM</td></tr>

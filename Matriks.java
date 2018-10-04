@@ -330,85 +330,105 @@ public class Matriks
     }
     return a;
   }
-  public void solveGauss(){
-          //I.S. Isi terdefinisi dan dalam bentu row echelon tereduksi atas
-          //F.S. Terbentuk persamaan dari matriks
-          Gauss();
-          String persT="";
-          DecimalFormat df2 = new DecimalFormat("#.##");
-          int i=bar-1;
-          int j;
-          int a=0;
-          int n=kol-2;
-          String Tpers="";
-          char symbol = 's';
-          String[] def = new String[kol-1];
-          while(i>=0){
-              j=pivotpoint(i);
-              if (j!=-999){
-                  if(j < n){
-                      while(j < n){
-                          def[n]=Character.toString(symbol);//menambah parameter
-                          symbol++;
-                          if (symbol=='x'){
-                              symbol='a';
-                          }
-                          n--;
-                      }
-                      int k=kol-1;
-                      if(Isi[i][k]!=0 && Isi[i][k]!=-0){
-                          Tpers=Tpers + df2.format(Isi[i][kol-1]);
-                      }
-                      k--;
-                      while (k>j) {
-                          if(Isi[i][k]!=1 && Isi[i][k]>0){
-                              Tpers=Tpers + "-" + df2.format(Isi[i][k]) + "(" + def[k] + ")";
-                          }
-                          else if(Isi[i][k]==1){
-                              Tpers=Tpers + "-" + "(" + def[k] + ")";
-                          }
-                          else if(Isi[i][k]<0){
-                              Tpers=Tpers + "+" + df2.format(Isi[i][k]*-1) + "(" + def[k] + ")";
-                          }
-                          k--;
-                      }
-                      def[j]=Tpers;
-                      n--;
-                  }
-                  else{
-                      int k=kol-1;
-                      if(Isi[i][k]!=0 && Isi[i][k]!=-0){
-                          Tpers=Tpers + df2.format(Isi[i][kol-1]);
-                      }
-                      k--;
-                      while (k>j) {
-                          if(Isi[i][k]!=1 && Isi[i][k]>0){
-                              Tpers=Tpers + "-" + df2.format(Isi[i][k]) + "(" + def[k] + ")";
-                          }
-                          else if(Isi[i][k]==1){
-                              Tpers=Tpers + "-" + "(" + def[k] + ")";
-                          }
-                          else if(Isi[i][k]<0){
-                              Tpers=Tpers + "+" + df2.format(Isi[i][k]*-1) + "(" + def[k] + ")";
-                          }
-                          k--;
-                      }
-                      def[j]=Tpers;
-                      n--;
-                  }
-              }
-              Tpers="";
-              i--;
-          }
-          for(int b=0;b<kol-1;b++){
-              pers=pers+"X"+(b+1)+" = "+def[b]+"\n";
-          }
-      }
-
-  public void solveGauss2()
-  // klo kepepet pake yg ini aj sumpah dripada gk kelar WKWKWKWKWK
+  public void solveGauss()
+  //I.S. Isi terdefinisi dan dalam bentu row echelon tereduksi atas
+  //F.S. Terbentuk persamaan dari matriks
   {
-    solveGaussJordan();
+    Gauss();
+    String persT="";
+    DecimalFormat df2 = new DecimalFormat("#.##");
+    int i=bar-1;
+    int j;
+    int a=0;
+    int n=kol-2;
+    String Tpers="";
+    String symbol = "u";
+    double temp;
+    double tempH = 0;
+    boolean nfe;
+    String[] def = new String[kol-1];
+    while(i>=0){
+        j=pivotpoint(i);
+        if (j!=-999){
+            if(j < n){
+                while(j < n){
+                    def[n]=symbol + Integer.toString(n+1);//menambah parameter
+                    n--;
+                }
+                int k=kol-1;
+                if(Isi[i][k]!=0 && Isi[i][k]!=-0){
+                    tempH = Isi[i][k];
+                }
+                k--;
+                while (k>j) {
+                    nfe=false;
+                    try {
+                        temp = Double.parseDouble(def[k]);
+                    } catch (NumberFormatException e) {
+                        nfe=true;
+                    }
+                    if (nfe) {
+                        if (Isi[i][k]!=0 && Isi[i][k]!=-0) {
+                            if (Isi [i][k] > 0) {
+                                Tpers = Tpers + "-" + df2.format(Isi[i][k]) + "(" + def[k] + ")";
+                            } else {
+                                Tpers = Tpers + "+" + df2.format(Isi[i][k] * (-1)) + "(" + def[k] + ")";
+                            }
+                        }
+                    } else{
+                        tempH = tempH - (Isi[i][k] * Double.parseDouble(def[k]));
+                    }
+                    k--;
+                }
+                if (!((tempH <= 0.05) && (tempH >= -0.05))) {
+                    def[j] = Tpers + "+" + df2.format(tempH);
+                } else {
+                    def[j] = Tpers;
+                }
+                n--;
+            }
+            else{
+                int k=kol-1;
+                if(Isi[i][k]!=0 && Isi[i][k]!=-0){
+                    Tpers=Tpers + df2.format(Isi[i][kol-1]);
+                }
+                k--;
+                while (k>j) {
+                    nfe=false;
+                    try {
+                        temp = Double.parseDouble(def[k]);
+                    } catch (NumberFormatException e) {
+                        nfe=true;
+                    }
+                    if (nfe) {
+                        if (Isi [i][k] > 0) {
+                            Tpers = Tpers + "-" + df2.format(Isi[i][k]) + "(" + def[k] + ")";
+                        } else {
+                            Tpers = Tpers + "+" + df2.format(Isi[i][k] * (-1)) + "(" + def[k] + ")";
+                        }
+                    } else{
+                        tempH = tempH - (Isi[i][k] * Double.parseDouble(def[k]));
+                    }
+                    k--;
+                }
+                if (!((tempH <= 0.05) && (tempH >= -0.05))) {
+                    def[j] = Tpers + "+" + df2.format(tempH);
+                } else {
+                    def[j] = Tpers;
+                }
+                n--;
+            }
+        }
+        Tpers="";
+        i--;
+    }
+    for(int b=0;b<kol-1;b++){
+        if (def[b].charAt(0) != 'u') {
+            pers = pers + "X" + (b + 1) + " = " + def[b] + "; \n";
+        } else{
+            pers = pers + "X" + (b + 1) + " = " + "(" + def[b] + ")" + "; \n";
+        }
+    }
   }
   public void solveGaussJordan()
   //prekondisi pemanggilan : matriks sudah berbentuk gauss jordan
@@ -437,9 +457,9 @@ public class Matriks
               {
                 if (Isi[i][j] > 0)
                 {
-                  hasil[pivotpoint(i)] += String.format(" -%.2f u%d", Isi[i][j], j+1);
+                  hasil[pivotpoint(i)] += String.format(" -%.2f (u%d)", Isi[i][j], j+1);
                 } else /*Isi[i][j] < 0 */ {
-                  hasil[pivotpoint(i)] += String.format(" +%.2f u%d", (-1) * Isi[i][j], j+1);
+                  hasil[pivotpoint(i)] += String.format(" +%.2f (u%d)", (-1) * Isi[i][j], j+1);
                 }
               }
             }
@@ -467,9 +487,9 @@ public class Matriks
               {
                 if (Isi[i][j] > 0)
                 {
-                  hasil[pivotpoint(i)] += String.format(" -%.2f u%d", Isi[i][j], j+1);
+                  hasil[pivotpoint(i)] += String.format(" -%.2f (u%d)", Isi[i][j], j+1);
                 } else /*Isi[i][j] < 0 */ {
-                  hasil[pivotpoint(i)] += String.format(" +%.2f u%d", Isi[i][j], j+1);
+                  hasil[pivotpoint(i)] += String.format(" +%.2f (u%d)", Isi[i][j], j+1);
                 }
               }
             }
@@ -481,19 +501,18 @@ public class Matriks
       {
         if (hasil[k].charAt(hasil[k].length()-1) == '=')
         {
-          hasil[k] += String.format(" u%d", k+1);
+          hasil[k] += String.format(" (u%d)", k+1);
         }
         pers += hasil[k] + "; \n";
       }
   }
-  public void solveInterpolasi()
+  public void solveInterpolasiGaussJordan()
     //prekondisi pemanggilan : matriks harus memiliki solusi dan non-parametrik
     //I.S. Isi terdefinisi dan dalam bentuk row echelon
     //F.S. Terbentuk persamaan interpolasi dari matriks row echelon
   {
         boolean first = true;
         this.hasil = 0;
-        tulism();
         int n = (bar < kol) ? bar : kol;
         persI = "f(X) = ";
         for (int i = 0 ; i < this.bar ; i++)
@@ -518,7 +537,8 @@ public class Matriks
             this.hasil = this.hasil + (Math.pow(this.x , i)*Isi[i][this.kol-1]);
           }
         }
-        System.out.println(this.hasil);
+        System.out.println(persI + "; ");
+        System.out.printf("f(%d) = %.2f\n", this.x, this.hasil);
   }
   public void solveInterpolasiGauss()
   //I.S. matriks sudah di Gauss. Prekondisi : harus valid(tidak ada no solution)
@@ -528,7 +548,6 @@ public class Matriks
     int i,j;
     this.hasil = 0;
     double[] nilai = new double[this.bar];
-    tulism();
     persI = "f(X) = ";
     for (i = this.bar ; i >0 ; i--)
     {
@@ -559,11 +578,10 @@ public class Matriks
           persI = persI + String.format(" + (%.2f)X^" + (i), nilai[i]);
         }
         this.hasil = this.hasil + (Math.pow(this.x , i)*nilai[i]);
-
-        System.out.println(persI);
       }
     }
-    System.out.println(this.hasil);
+    System.out.println(persI + "; ");
+    System.out.printf("f(%d) = %.2f\n", this.x, this.hasil);
   }
   public void bacafile()
   //Membaca file yang berisi matriks dan mengisikan ke bentuk matriks
@@ -642,7 +660,6 @@ public class Matriks
         else
         {
           // interpolasi
-          solveInterpolasi();
           printWriter.print(persI);
           printWriter.printf("f(%d) = %.2f",x,this.hasil);
           System.out.printf("Hasil Tersimpan! pada file %s\n", namafile);
@@ -656,29 +673,24 @@ public class Matriks
     }
   }
 
-  public boolean nosol()
+  public boolean IsNoSol()
+  /* Mengembalikan true apabila ada suatu baris yang 0 0 0 0 0 0 bn
+     dimana bn != 0; karena matriks tidak memiliki solusi
+     Prekondisi Pemanggilan : SusunMatrix sudah terpanggil dan matrix sudah rapi
+  */
   {
+    boolean nosol = false;
     int i = this.bar-1;
-    int j = 0; boolean iya = false;
-    boolean IsNoSol = false;
-    while ((j <= this.kol-1) && !(iya))
+    while ((i >= 0) && !nosol)
     {
-      if (j != this.kol-1)
+      if (IsiBarNol(i) && Isi[i][this.kol-1] != 0)
       {
-        if (Isi[i][j] == 0)
-        {
-          j++;
-        } else {
-          iya = true;
-        }
-      } else { //j == this.kol-1
-        if (Isi[i][j] != 0)
-        {
-          IsNoSol = true;
-        }
+        nosol = true; //no solution
+      } else {
+        i--;
       }
     }
-    return IsNoSol;
+    return nosol;
   }
   public static int menu1()
   //menuliskan menu awal dan membaca masukan menu

@@ -32,7 +32,7 @@ public class TuBes {
             System.out.println("Bentuk REF Matriksmu :");
             mat.tulism();
             System.out.println("Hasil Solve Gauss mu :");
-            mat.solveGauss2();
+            mat.solveGauss();
             System.out.println(mat.pers);
             mat.tulisf(true);
           }
@@ -63,7 +63,7 @@ public class TuBes {
             System.out.println("Bentuk REF Matriksmu :");
             mat.tulism();
             System.out.println("Hasil Solve Gauss mu :");
-            mat.solveGauss2();
+            mat.solveGauss();
             System.out.println(mat.pers);
             mat.tulisf(true);
           }
@@ -103,11 +103,16 @@ public class TuBes {
             System.out.println("Bentuk REF Matriksmu :");
             mat.tulism();
             System.out.println("Hasil Solve Gauss mu :");
-            //mat.solveGauss();
+            mat.solveGauss();
             System.out.println(mat.pers);
+            if (mat.IsNoSol())
+            {
+              System.out.println("Kurva Invalid! Ada Garis Vertikal pada kurva anda!");
+              break;
+            }
             System.out.print("Masukkan nilai X : ");
             mat.x = scanner.nextInt();
-            mat.solveInterpolasi();
+            mat.solveInterpolasiGauss();
             mat.tulisf(false); //karena yang disimpan akan selalu berbentuk persamaan dan nilai fungsi
           }
           else if (hasil3 == 2)
@@ -118,9 +123,14 @@ public class TuBes {
             System.out.println("Hasil Solve Gauss-Jordan mu :");
             mat.solveGaussJordan();
             System.out.println(mat.pers);
+            if (mat.IsNoSol())
+            {
+              System.out.println("Kurva Invalid! Ada Garis Vertikal pada kurva anda!");
+              break;
+            }
             System.out.print("Masukkan nilai X : ");
             mat.x = scanner.nextInt();
-            mat.solveInterpolasi();
+            mat.solveInterpolasiGaussJordan();
             mat.tulisf(false); //karena yang disimpan akan selalu berbentuk persamaan dan nilai fungsi
           }
           else if (hasil3 == 3)
@@ -130,7 +140,7 @@ public class TuBes {
         }
         else if (hasil2 == 2)
         {
-          //ini prosedur input dri file
+          //apabila input dri file
           Matriks mat = new Matriks(1, 1);
           mat.bacafile();
           mat.Interpolasi();
@@ -142,11 +152,16 @@ public class TuBes {
             System.out.println("Bentuk REF Matriksmu :");
             mat.tulism();
             System.out.println("Hasil Solve Gauss mu :");
-            //mat.solveGauss();
+            mat.solveGauss();
             System.out.println(mat.pers);
+            if (mat.IsNoSol())
+            {
+              System.out.println("Kurva Invalid! Ada Garis Vertikal pada kurva anda!");
+              break;
+            }
             System.out.print("Masukkan nilai X : ");
             mat.x = scanner.nextInt();
-            mat.solveInterpolasi();
+            mat.solveInterpolasiGauss();
             mat.tulisf(false); //karena yang disimpan akan selalu berbentuk persamaan dan nilai fungsi
           }
           else if (hasil3 == 2)
@@ -157,9 +172,14 @@ public class TuBes {
             System.out.println("Hasil Solve Gauss-Jordan mu :");
             mat.solveGaussJordan();
             System.out.println(mat.pers);
+            if (mat.IsNoSol())
+            {
+              System.out.println("Kurva Invalid! Ada Garis Vertikal pada kurva anda!");
+              break;
+            }
             System.out.print("Masukkan nilai X : ");
             mat.x = scanner.nextInt();
-            mat.solveInterpolasi();
+            mat.solveInterpolasiGaussJordan();
             mat.tulisf(false); //karena yang disimpan akan selalu berbentuk persamaan dan nilai fungsi
           }
           else if (hasil3 == 3)
@@ -175,7 +195,7 @@ public class TuBes {
       else if (hasil1 == 3) {
         break;
       }
-      System.out.print("Lagi?(Y = Yes, N = No) "); lagi = scanner.next().charAt(0);
+      System.out.print("Ada Perhitungan yang lain?(Y = Yes, N = No) "); lagi = scanner.next().charAt(0);
       if ((lagi == 'y' || lagi == 'Y'))
       {
         System.out.println("Program dimulai kembali");

@@ -1,6 +1,7 @@
 <h1>Tugas Besar 1 IF2123 Aljabar Geometri</h1>
-
-File-file yang ada di Repository ini merupakan kerja keras sia-sia kami ber3<br><br>
+<h7>========================================================================================================
+</h7>
+<h2>Sistem Persamaan Linier dan Aplikasinya</h2>
 
 Project Name : TuBes AlGeo 1 (Matrix)
 

@@ -636,7 +636,7 @@ public class Matriks
     char simpan = 'y';
     //do
     //{
-      System.out.print("Apakah hasil ingin disimpan ke dalam file?(y/n)\n");
+      System.out.print("Apakah hasil ingin disimpan ke dalam file?(y/n) ");
       simpan = scanner.next().charAt(0);
     //} while (simpan != 'y' || simpan != 'n' || simpan != 'Y' || simpan != 'N');
     if ((simpan == 'y') || (simpan == 'Y'))
